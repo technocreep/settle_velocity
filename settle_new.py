@@ -8,11 +8,11 @@ from openpyxl import Workbook
     # INITIAL DATA
 min_1 = input('Название и плотность (кг/м3) минерала #1 (Золото 17000): ').split(' ')
 min_2 = input('Название и плотность (кг/м3) минерала #2 (Кварц 2650): ').split(' ')
-rho_1 = float(min_1[1])       # CLASS PROPERTY
-rho_2 = float(min_2[1])        # CLASS PROPERTY
+rho_1 = float(min_1[1])      
+rho_2 = float(min_2[1])       
 
 
-w_percentage = float(input('Содержание твердого, %: '))    # CLASS PROPERTY
+w_percentage = float(input('Содержание твердого, %: '))   
 krup0 = float(input('min крупность (мkм): '))
 krup1 = float(input('max крупность (мkм): '))
 
@@ -38,7 +38,6 @@ while True:
 def round_000(i):
     return round(i*1000)/1000
 
-    # TABLE DF
 
 # PARTICLE SIZE
 size = np.array([int(i) for i in np.linspace(krup0, krup1, n)])
@@ -50,16 +49,9 @@ p3 = np.array([round_000(i) for i in (np.linspace(rho_1, rho_2, n))])
 df = pd.DataFrame(columns=[i for i in p3], index=[i for i in size])
 
 for i in p3:
-    
     re2y = math.pi*(size/1000000)**3*(i-1050)*g*1050/(6*m0*m0)
-    #df['re2y'] = re2y
-
     re = 0.084*re2y**0.811
-    #df['re'] = re
-
     v0 = re*m0/((size/1000000)*p2)
-    #df['Скорость'] = v0
-
     df[i] = v0
 
 # EXPORT TO EXCELL FILE
